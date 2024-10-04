@@ -38,14 +38,17 @@ namespace clu.openapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // enables API explorer for examining endpoints by default (Microsoft.AspNetCore.Mvc.ApiExplorer)
             services.AddMvc(setupAction =>
             {
+                setupAction.Filters.Add(new AuthorizeFilter());
+
+                //setupAction.Filters.Add(new ProducesDefaultResponseTypeAttribute());
+
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+                setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status401Unauthorized));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
-                setupAction.Filters.Add(new ProducesDefaultResponseTypeAttribute());
-                setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status401Unauthorized));
-                setupAction.Filters.Add(new AuthorizeFilter());
 
                 setupAction.ReturnHttpNotAcceptable = true;
 
@@ -82,11 +85,11 @@ namespace clu.openapi
                     if (actionContext.ModelState.ErrorCount > 0
                         && actionExecutingContext?.ActionArguments.Count == actionContext.ActionDescriptor.Parameters.Count)
                     {
-                        return new UnprocessableEntityObjectResult(actionContext.ModelState);
+                        return new UnprocessableEntityObjectResult(actionContext.ModelState); // StatusCodes.Status422UnprocessableEntity
                     }
 
                     // we're dealing with null/unparsable input if one of the keys wasn't correctly found/parsed
-                    return new BadRequestObjectResult(actionContext.ModelState);
+                    return new BadRequestObjectResult(actionContext.ModelState); // StatusCodes.Status400BadRequest
                 };
             });
 
@@ -130,15 +133,19 @@ namespace clu.openapi
                             {
                                 Email = "camiel.luijkx@gmail.com",
                                 Name = "Camiel Luijkx",
-                                Url = new Uri("https://www.linkedin.com/in/camielluijkx")
+                                Url = new Uri("https://www.linkedin.com/in/camielluijkx"),
+                                //Extensions to be used for customization like using address information, custom logos and headers
                             },
                             License = new Microsoft.OpenApi.Models.OpenApiLicense
                             {
                                 Name = "MIT License",
                                 Url = new Uri("https://opensource.org/licenses/MIT")
-                            }
+                            },
+                            //TermsOfService etc.
                         });
                 }
+
+                //setupAction.ResolveConflictingActions to be used for custom conflicting action resolving implementation
 
                 setupAction.AddSecurityDefinition("basicAuth",
                     new OpenApiSecurityScheme
@@ -190,6 +197,7 @@ namespace clu.openapi
                 string xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 string xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
 
+                // include XML documentation file of assembly project
                 setupAction.IncludeXmlComments(xmlCommentsFullPath);
             });
         }
@@ -229,6 +237,7 @@ namespace clu.openapi
                 //    "/swagger/LibraryOpenAPISpecification/swagger.json",
                 //    "Library Api");
 
+                // documentation will be available at API root
                 setupAction.RoutePrefix = "";
 
                 setupAction.DefaultModelExpandDepth(2);

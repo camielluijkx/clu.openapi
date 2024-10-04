@@ -21,7 +21,7 @@ namespace clu.openapi.Attributes
                 throw new ArgumentNullException(nameof(mediaType));
             }
 
-            // check if the inputted media types are valid media types and add them to the media types collection                     
+            // check if the inputted media types are valid media types and add them to the media types collection
             if (MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue parsedMediaType))
             {
                 _mediaTypes.Add(parsedMediaType);
@@ -58,7 +58,7 @@ namespace clu.openapi.Attributes
 
             if (!requestHeaders.ContainsKey(_requestHeaderToMatch))
             {
-                return false;
+                return false; // StatusCodes.Status406NotAcceptable
             }
 
             MediaType parsedRequestMediaType = new MediaType(requestHeaders[_requestHeaderToMatch]);

@@ -6,6 +6,12 @@ namespace clu.openapi.Profiles
     {
         public BookProfile()
         {
+            CreateMap<Entities.Book, Models.BookWithAmountOfPages>()
+                .ForMember(dest => dest.AuthorFirstName, opt => opt.MapFrom(src => $"{src.Author.FirstName}"))
+                .ForMember(dest => dest.AuthorLastName, opt => opt.MapFrom(src => $"{src.Author.LastName}"))
+                .ForMember(dest => dest.AmountOfPages, opt => opt.MapFrom(src => $"{src.AmountOfPages}"));
+
+            // using automapper to easily define different DTO behaviour supported by vendor-specific media types
             CreateMap<Entities.Book, Models.BookWithConcatenatedAuthorName>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => $"{src.Author.FirstName} {src.Author.LastName}"));
 

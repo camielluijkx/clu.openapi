@@ -14,7 +14,7 @@ namespace clu.openapi.OperationFilters
             }
 
             operation.RequestBody.Content.Add(
-                "application/vnd.marvin.bookforcreationwithamountofpages+json",
+                "application/clu.openapi.bookforcreationwithamountofpages+json",
                 new OpenApiMediaType
                 {
                     Schema = context.SchemaRegistry.GetOrRegister(typeof(BookForCreationWithAmountOfPages))

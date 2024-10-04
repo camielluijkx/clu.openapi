@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace clu.openapi.Controllers
 {
     [Produces("application/json", "application/xml")]
-    // [Route("api/authors")] 
+    // [Route("api/authors")]
     [Route("api/v{version:apiVersion}/authors")]
     [ApiController]
     public class AuthorsController : ControllerBase

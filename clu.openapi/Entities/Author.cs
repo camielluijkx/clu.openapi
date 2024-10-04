@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace clu.openapi.Entities
 {
-    #pragma warning disable CS1591
+    #pragma warning disable CS1591 // suppress XML comment is missing warning
 
     [Table("Authors")]
     public class Author

@@ -15,11 +15,18 @@ namespace clu.openapi.OperationFilters
             }
 
             operation.Responses[StatusCodes.Status200OK.ToString()].Content.Add(
-                "application/vnd.marvin.bookwithconcatenatedauthorname+json",
+                "application/clu.openapi.bookwithconcatenatedauthorname+json",
                 new OpenApiMediaType
                 {
                     Schema = context.SchemaRegistry.GetOrRegister(typeof(BookWithConcatenatedAuthorName))
                 });
+
+            operation.Responses[StatusCodes.Status200OK.ToString()].Content.Add(
+               "application/clu.openapi.bookwithamountofpages+json",
+               new OpenApiMediaType
+               {
+                   Schema = context.SchemaRegistry.GetOrRegister(typeof(BookWithAmountOfPages))
+               });
         }
     }
 }
