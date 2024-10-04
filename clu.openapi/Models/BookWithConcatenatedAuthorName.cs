@@ -2,7 +2,7 @@
 
 namespace clu.openapi.Models
 {
-    public class BookWithConcatenatedAuthorName
+    public class BookWithConcatenatedAuthorName // dto
     {
         public Guid Id { get; set; }
 

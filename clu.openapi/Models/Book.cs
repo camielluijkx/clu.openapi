@@ -2,7 +2,7 @@
 
 namespace clu.openapi.Models
 {
-    public class Book
+    public class Book // dto
     {
         public Guid Id { get; set; }
 

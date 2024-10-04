@@ -2,7 +2,7 @@
 
 namespace clu.openapi.Models
 {
-    public class BookWithAmountOfPages
+    public class BookWithAmountOfPages // dto
     {
         public Guid Id { get; set; }
 

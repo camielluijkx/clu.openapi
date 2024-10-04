@@ -205,7 +205,7 @@ namespace clu.openapi.Controllers
 
             bookToAdd.Author = await _authorRepository.GetAuthorAsync(authorId); // Bugfix: book with author should be returned
 
-            return CreatedAtRoute("GetBookWithAmountOfPages", new { version = "1", authorId, bookId = bookToAdd.Id }, _mapper.Map<Book>(bookToAdd)); // Fixme: amount of pages is missing in response
+            return CreatedAtRoute("GetBookWithAmountOfPages", new { version = "1", authorId, bookId = bookToAdd.Id }, _mapper.Map<BookWithAmountOfPages>(bookToAdd));
         }
     }
 }

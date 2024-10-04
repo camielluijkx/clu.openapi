@@ -8,7 +8,7 @@ namespace clu.openapi.Entities
     #pragma warning disable CS1591 // suppress XML comment is missing warning
 
     [Table("Authors")]
-    public class Author
+    public class Author // domain model
     {
         [Key]
         public Guid Id { get; set; }

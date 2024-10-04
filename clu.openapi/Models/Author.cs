@@ -5,7 +5,7 @@ namespace clu.openapi.Models
     /// <summary>
     /// An author with Id, FirstName and LastName fields
     /// </summary>
-    public class Author
+    public class Author // dto
     {
         /// <summary>
         /// The id of the author

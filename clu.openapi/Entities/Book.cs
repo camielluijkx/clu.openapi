@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace clu.openapi.Entities
 {
     [Table("Books")]
-    public class Book
+    public class Book // domain model
     {
         [Key]
         public Guid Id { get; set; }

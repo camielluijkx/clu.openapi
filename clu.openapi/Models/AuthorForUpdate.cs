@@ -5,7 +5,7 @@ namespace clu.openapi.Models
     /// <summary>
     /// An author for update with FirstName and LastName fields
     /// </summary>
-    public class AuthorForUpdate
+    public class AuthorForUpdate // dto
     {
         /// <summary>
         /// The first name of the author
